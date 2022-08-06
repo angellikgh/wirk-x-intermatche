@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "./providers/authProvider";
 
 import "./css/style.css";
-import "./charts/ChartjsConfig";
+// import "./charts/ChartjsConfig";
 
 import PrivateRoute from "./components/PrivateRoute";
 // Import pages
