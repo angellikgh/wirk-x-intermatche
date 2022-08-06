@@ -25,7 +25,7 @@ function App() {
   return (
     <Routes>
       <Route>
-        <Route path="/signin" element={<Singin />} />
+        <Route path="/" element={<Singin />} />
       </Route>
     </Routes>
   );
