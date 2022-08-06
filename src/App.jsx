@@ -8,9 +8,9 @@ import "./css/style.css";
 import PrivateRoute from "./components/PrivateRoute";
 // Import pages
 
-import Dashboard from "./pages/Dashboard";
-import Singin from "./pages/auth/Signin";
-import Signup from "./pages/auth/Signup";
+// import Dashboard from './pages/Dashboard';
+import Singin from './pages/auth/Signin';
+// import Signup from './pages/auth/Signup';
 
 function App() {
 
