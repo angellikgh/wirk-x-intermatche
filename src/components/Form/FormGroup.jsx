@@ -3,10 +3,10 @@ import cx from 'classnames';
 
 function FormGroup({ label, children, error, errors }) {
   return (
-    <div class="flex flex-col mx-[6px] mb-[20px]">
+    <div className="flex flex-col mx-[6px] mb-[20px]">
       {label && (
         <label
-          className={cx('text-base font-medium mb-[5px]', {
+          className={cx('text-base font-medium mb-[5px] leading-[17px]', {
             'text-danger': error,
           })}
         >

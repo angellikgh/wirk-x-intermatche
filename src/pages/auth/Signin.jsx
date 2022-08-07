@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Logo from '../../images/logo.svg';
 import TextInput from '../../components/Form/TextInput';
 import FormGroup from '../../components/Form/FormGroup';
+import { Header } from './components';
 
 function Singin() {
   const validationSchema = yup.object({
@@ -36,9 +37,7 @@ function Singin() {
         </div>
 
         <div className="bg-white rounded-xl p-[40px] w-[364px] shadow-card">
-          <h1 className="text-center text-[24px] font-[600] mb-[20px]">
-            Se connector
-          </h1>
+          <Header title="Se connector" />
           <form onSubmit={formik.handleSubmit} method="post">
             <FormGroup
               label="Email"
