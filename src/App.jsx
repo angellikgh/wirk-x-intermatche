@@ -10,7 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 // import Dashboard from './pages/Dashboard';
 import Singin from './pages/auth/Signin';
-// import Signup from './pages/auth/Signup';
+import Signup from './pages/auth/Signup';
 
 function App() {
 
@@ -26,6 +26,7 @@ function App() {
     <Routes>
       <Route>
         <Route path="/" element={<Singin />} />
+        <Route path="/signup" element={<Signup />} />
       </Route>
     </Routes>
   );
