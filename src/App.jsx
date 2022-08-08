@@ -8,7 +8,7 @@ import "./css/style.css";
 import PrivateRoute from "./components/PrivateRoute";
 // Import pages
 
-// import Dashboard from './pages/Dashboard';
+import Main from './pages/Main';
 import Singin from './pages/auth/Signin';
 import Signup from './pages/auth/Signup';
 
@@ -24,10 +24,9 @@ function App() {
 
   return (
     <Routes>
-      <Route>
-        <Route path="/" element={<Singin />} />
+      <Route exact path="/" element={<Singin />} />
         <Route path="/signup" element={<Signup />} />
-      </Route>
+      <Route path="*" element={<Main />} />
     </Routes>
   );
 }

@@ -16,4 +16,10 @@
   html {
     color: #535066;
   }
+
+  #sidebar {
+    background-image: url(/src/images/logo-sidebar.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
 }
