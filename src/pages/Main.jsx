@@ -9,7 +9,7 @@ export default function ({}) {
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
 
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+      <div className="main w-screen h-screen overflow-y-auto">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requests" element={<Dashboard />} />

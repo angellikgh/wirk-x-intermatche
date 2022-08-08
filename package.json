@@ -20,6 +20,7 @@
     "react-flatpickr": "^3.10.13",
     "react-router-dom": "^6.3.0",
     "react-transition-group": "^4.4.2",
+    "recharts": "^2.1.13",
     "yup": "^0.32.11"
   },
   "devDependencies": {

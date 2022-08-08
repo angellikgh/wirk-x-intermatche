@@ -30,13 +30,32 @@ module.exports = {
       },
       colors: {
         DEFAULT: '#535066',
-        primary: '#535066',
-        danger: '#EE1D23'
+        primary: {
+          DEFAULT: '#535066',
+          light: '#8C84FF1A',
+        },
+        danger: {
+          DEFAUT: '#EE1D23',
+        },
+        info: {
+          light: '#F7F8FA',
+        },
+        warning: {
+          DEFAULT: '#FF918A',
+          light: '#FF966C1F',
+        }
+      },
+      margin: {
+        '5px': '5px !important'
       },
       textColor: {
         DEFAULT: '#535066',
+        primary: '#7982FF',
         base: '#535066',
-        muted: '#A6B0C5'
+        muted: '#A6B0C5',
+        red: {
+          light: '#FF9092'
+        }
       },
       outline: {
         blue: '2px solid rgba(0, 112, 244, 0.5)',
@@ -72,6 +91,7 @@ module.exports = {
 
       addComponents({
         '.btn': {
+          boxShadow: 'none !important',
           color: '#ffffff',
           padding: '8px 12px',
           fontSize: '13px !important',
@@ -86,6 +106,78 @@ module.exports = {
             backgroundColor: '#333142',
             boxShadow: '0px 14px 44px rgba(166, 176, 197, 0.28)'
           },
+        },
+        '.btn-outline': {
+          backgroundColor: '#ffffff',
+          border: '1px solid #F1F4FA !important',
+          color: '#535066',
+
+          '&:hover': {
+            backgroundColor: '#d6d6d6',
+            boxShadow: '0px 14px 44px rgba(166, 176, 197, 0.28)'
+          },
+        },
+      });
+
+      addComponents({
+        '.main': {
+          padding: '40px',
+          gap: '10px',
+        },
+
+        '.page-title': {
+          marginBottom: '20px',
+          padding: '5px 0px',
+          h1: {
+            fontSize: '18px',
+            lineHeight: '21px',
+          },
+          svg: {
+            marginRight: '10px',
+          }
+        },
+      });
+
+      addComponents({
+        '.card': {
+          borderRadius: '10px',
+          padding: '20px',
+          backgroundColor: '#F7F8FA',
+
+          '.card-title': {
+            fontSize: '14px',
+            lineHeight: '17px',
+            paddingBottom: '10px'
+          },
+          '.card-body': {
+            paddingTop: '10px'
+          },
+          '[type=number]': {
+            fontSize: '12px'
+          },
+          '[type=category]': {
+            fontSize: '12px'
+          },
+          '.recharts-surface': {
+            borderRadius: '16px'
+          }
+        },
+      });
+
+      addComponents({
+        '.summary': {
+          marginBottom: '20px',
+
+          '.summary-title': {
+            fontSize: '14px',
+            lineHeight: '17px',
+            marginBottom: '5px',
+          },
+          '.summary-content': {
+            fontSize: '24px',
+            fontWeight: 600,
+            lineHeight: '29px',
+          }
         },
       });
     }),
