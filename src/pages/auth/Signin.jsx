@@ -60,7 +60,7 @@ function Singin() {
             >
               <TextInput
                 name="password"
-                type="text"
+                type="password"
                 onChange={formik.handleChange}
                 value={formik.values.password}
                 className={formik.errors.password ? 'border-danger' : ''}
