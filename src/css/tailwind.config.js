@@ -51,6 +51,7 @@ module.exports = {
       textColor: {
         DEFAULT: '#535066',
         primary: '#7982FF',
+        danger: '#EE1D23',
         base: '#535066',
         muted: '#A6B0C5',
         red: {
