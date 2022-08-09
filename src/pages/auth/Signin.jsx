@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Logo from '../../images/logo.svg';
@@ -7,7 +7,8 @@ import TextInput from '../../components/Form/TextInput';
 import FormGroup from '../../components/Form/FormGroup';
 import { Header } from './components';
 
-function Singin() {
+function Singin(props) {
+  const navigate = useNavigate();
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -26,6 +27,7 @@ function Singin() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // TODO: login
+      navigate('/dashboard');
     },
   });
 

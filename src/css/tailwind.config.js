@@ -19,7 +19,7 @@ module.exports = {
       borderColor: {
         base: '#E3E6F1',
         danger: '#EE1D23',
-        muted: '',
+        light: '#F1F4FA',
       },
       boxShadow: {
         DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
@@ -33,6 +33,9 @@ module.exports = {
         primary: {
           DEFAULT: '#535066',
           light: '#8C84FF1A',
+        },
+        success: {
+          light: '#9BDFB633',
         },
         danger: {
           DEFAUT: '#EE1D23',
@@ -179,6 +182,38 @@ module.exports = {
             fontWeight: 600,
             lineHeight: '29px',
           }
+        },
+      });
+
+      addComponents({
+        '.table': {
+          fontSize: '12px',
+          lineHeight: '14px', 
+          textAlign: 'left',
+          width: '100%',
+
+          thead: {
+            color: '#A6B0C5',
+            fontWeight: 600,
+
+            th: {
+              padding: '0.6rem'
+            }
+          },
+          tbody: {
+            td: {
+              padding: '0.4rem'
+            }
+          }
+        },
+      });
+
+      addComponents({
+        '.tag': {
+          borderRadius: '5px',
+          fontSize: '11px',
+          lineHeight: '13px',
+          padding: '5px 7px',
         },
       });
     }),

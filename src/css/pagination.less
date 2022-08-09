@@ -1,0 +1,24 @@
+@import url('/node_modules/rc-pagination/assets/index.less');
+
+@primary-color: #8894FF;
+
+.@{pagination-prefix-cls} {
+    &-item {
+        border-radius: 0.25rem;
+    }
+
+    &-item-link {
+        font-size: 16px !important;
+    }
+
+    &-prev,
+    &-next,
+    &-item-link {
+        border-radius: 4px;
+        
+        .@{pagination-prefix-cls}-item-link {
+            border-radius: 4px;
+        }
+    }
+
+}
