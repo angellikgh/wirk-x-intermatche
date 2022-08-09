@@ -98,10 +98,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         id="sidebar"
         ref={sidebar}
         className={cx(
-          `flex flex-col absolute`,
-          `z-40 left-0 top-0 lg:left-auto lg:top-auto h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar shrink-0 bg-[#F7F8FA]`,
-          `p-[25px] pl-[30px]`,
-          `w-[200px]`
+          `flex flex-col`,
+          `z-40 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar shrink-0`,
+          'bg-[#F7F8FA]',
+          'p-[25px] pl-[30px]',
+          'w-[200px]'
         )}
       >
         {/* Sidebar header */}
@@ -143,7 +144,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               </MenuItem>
             </ul>
 
-            <Link to="/logout" className="d-block font-[12px] mt-[96px]">
+            <Link to="/logout" className="block text-[12px] mt-[96px]">
               Se deconnecter
             </Link>
           </div>
