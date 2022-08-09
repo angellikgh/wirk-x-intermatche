@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from 'rc-pagination';
 import cx from 'classnames';
 
@@ -121,10 +122,12 @@ export default function () {
                       <td width="120">{item.EndDate}</td>
                       <td width="120">{item.Duration}</td>
                       <td className="text-right p-0">
-                        <ButtonOutline
-                          className="text-[10px] leading-[12px]"
-                          text="Voir"
-                        />
+                        <Link
+                          className="btn btn-outline rounded text-[10px] leading-[12px]"
+                          to={`/requests/${item.IdRequest}`}
+                        >
+                          Voir
+                        </Link>
                       </td>
                     </tr>
                   );
