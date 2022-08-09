@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Sidebar from '../partials/Sidebar';
-import Dashboard from './dashboard';
+import Dashboard from './home';
 import Requests from './requests';
 import RequestDetail from './requests/Detail';
 
