@@ -14,7 +14,7 @@ export default function ({}) {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requests" element={<Requests />} />
-          <Route path="/users" element={<Dashboard />} />
+          <Route path="/users" />
         </Routes>
       </div>
     </div>
