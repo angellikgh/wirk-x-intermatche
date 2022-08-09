@@ -6,7 +6,7 @@ import Logo from '../images/logo-title.svg';
 import * as Icons from '../components/Icons';
 
 function MenuItem({ title, children, currentPath, pathname }) {
-  const isActive = pathname === currentPath;
+  const isActive = currentPath.includes(pathname);
   return (
     <li
       className={cx('mb-[10px] rounded', {
@@ -44,7 +44,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
-
+  console.log(pathname);
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
