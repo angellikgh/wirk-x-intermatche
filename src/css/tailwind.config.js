@@ -20,6 +20,7 @@ module.exports = {
         base: '#E3E6F1',
         danger: '#EE1D23',
         light: '#F1F4FA',
+        grey: '#A6B0C533',
       },
       boxShadow: {
         DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
@@ -46,6 +47,9 @@ module.exports = {
         warning: {
           DEFAULT: '#FF918A',
           light: '#FF966C1F',
+        },
+        muted: {
+          DEFAULT: '#A6B0C5',
         }
       },
       margin: {
@@ -68,8 +72,9 @@ module.exports = {
         sans: ['SF Pro Display'],
       },
       fontSize: {
-        xs: ['0.75rem', { lineHeight: '1.5' }],
-        sm: ['12px', { lineHeight: '17px' }],
+        xxs: ['0.625rem', { lineHeight: '0.75rem' }],
+        xs: ['0.75rem', { lineHeight: '0.875rem' }],
+        sm: ['12px', { lineHeight: '14px' }],
         base: ['14px', { lineHeight: '1.5'}],
         lg: ['1.125rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
         xl: ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
@@ -98,7 +103,7 @@ module.exports = {
           boxShadow: 'none !important',
           color: '#ffffff',
           padding: '8px 12px',
-          fontSize: '13px !important',
+          fontSize: '13px',
           fontWeight: '600',
           lineHeight: '16px'
         },
