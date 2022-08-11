@@ -96,7 +96,7 @@ const AuthProvider = ({ children }) => {
 
     return AuthService.login(credential)
       .then((user) => {
-        AuthService._userId(user.idUser);
+        AuthService._userId(user.id);
         dispatch({ type: EVENT_TYPES.LOGIN_SUCCESS, payload: user });
         return true;
       })
