@@ -2,8 +2,27 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 
 export const tailwindConfig = () => {
   // Tailwind config
-  return resolveConfig('./src/css/tailwind.config.js')
-}
+  return resolveConfig('./src/css/tailwind.config.js');
+};
+
+export const setAuthToken = (token) => {
+  const { token_type, access_token } = token;
+
+  switch (token_type) {
+    case TOKEN_TYPES.BEARER_TOKEN:
+      localStorage.setItem('token', `Bearer ${access_token}`);
+      break;
+    default:
+      localStorage.setItem('token', access_token);
+      break;
+  }
+};
+
+export const getAuthToken = () => localStorage.token;
+
+export const removeAuthToken = () => {
+  localStorage.removeItem('token');
+};
 
 export const hexToRGB = (h) => {
   let r = 0;
@@ -21,15 +40,17 @@ export const hexToRGB = (h) => {
   return `${+r},${+g},${+b}`;
 };
 
-export const formatValue = (value) => Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumSignificantDigits: 3,
-  notation: 'compact',
-}).format(value);
+export const formatValue = (value) =>
+  Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumSignificantDigits: 3,
+    notation: 'compact',
+  }).format(value);
 
-export const validateEmail = email => {
-  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const validateEmail = (email) => {
+  const regex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   return regex.test(String(email).toLowerCase());
 };

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import cx from 'classnames';
 
 import Logo from '../images/logo-title.svg';
 import * as Icons from '../components/Icons';
+import { useAuthDispatch } from '../providers/authProvider';
 
 function MenuItem({ title, children, currentPath, pathname }) {
   const isActive = currentPath.includes(pathname);
@@ -39,7 +40,9 @@ function MenuItem({ title, children, currentPath, pathname }) {
 }
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const { onLogout } = useAuthDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const { pathname } = location;
 
   const trigger = useRef(null);
@@ -83,6 +86,12 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       document.querySelector('body').classList.remove('sidebar-expanded');
     }
   }, [sidebarExpanded]);
+
+  function handleLogout() {
+    onLogout().then(() => {
+      navigate('/signin');
+    });
+  }
 
   return (
     <div>
@@ -143,9 +152,12 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               </MenuItem>
             </ul>
 
-            <Link to="/" className="block text-[12px] mt-[96px]">
+            <button
+              onClick={handleLogout}
+              className="block text-[12px] mt-[96px]"
+            >
               Se deconnecter
-            </Link>
+            </button>
           </div>
         </div>
       </div>
