@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, memo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const data = [
@@ -7,7 +7,7 @@ const data = [
   { name: 'Consommé', value: 300 },
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+const COLORS = ['#8E30FF', '#0263FF', '#FF7723'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -16,7 +16,6 @@ const renderCustomizedLabel = ({
   midAngle,
   innerRadius,
   outerRadius,
-  percent,
   name,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -37,25 +36,40 @@ const renderCustomizedLabel = ({
   );
 };
 
-export default class CustomizedPieChart extends PureComponent {
+class CustomizedPieChart extends PureComponent {
   render() {
+    // const { data, width, height } = this.props;
+    const { width, height } = this.props;
+
     return (
-      <PieChart width={250} height={250} className="m-auto">
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={renderCustomizedLabel}
-          outerRadius={125}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
+      <ResponsiveContainer width={width} height={height}>
+        <PieChart className="m-auto">
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={125}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
     );
   }
 }
+
+CustomizedPieChart.defaultProps = {
+  width: '100%',
+  height: 300,
+};
+
+export default memo(CustomizedPieChart);

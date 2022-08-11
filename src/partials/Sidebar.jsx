@@ -44,7 +44,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
-  console.log(pathname);
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
@@ -144,7 +143,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               </MenuItem>
             </ul>
 
-            <Link to="/logout" className="block text-[12px] mt-[96px]">
+            <Link to="/" className="block text-[12px] mt-[96px]">
               Se deconnecter
             </Link>
           </div>

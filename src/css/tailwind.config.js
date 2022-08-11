@@ -155,6 +155,7 @@ module.exports = {
 
           '.card-title': {
             fontSize: '14px',
+            fontWeight: 600,
             lineHeight: '17px',
             paddingBottom: '10px'
           },
@@ -179,6 +180,7 @@ module.exports = {
 
           '.summary-title': {
             fontSize: '14px',
+            fontWeight: 600,
             lineHeight: '17px',
             marginBottom: '5px',
           },

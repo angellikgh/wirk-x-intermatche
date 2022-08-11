@@ -1,64 +1,83 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import React, { useRef, useEffect, useState } from 'react';
 
-const data = [
-  {
-    name: '1200',
-    uv: 10,
-    pv: 20,
-    amt: 45,
-  },
-  {
-    name: '1011',
-    uv: 12,
-    pv: 45,
-    amt: 28,
-  },
-  {
-    name: '1001',
-    uv: 10,
-    pv: 25,
-    amt: 19,
-  },
-];
+import {
+  Chart,
+  CategoryScale,
+  BarController,
+  BarElement,
+  LinearScale,
+  TimeScale,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import 'chartjs-adapter-moment';
 
-export default function StackedBarChart(props) {
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  TimeScale,
+  Tooltip,
+  Legend
+);
+
+function BarChart01({ data, width, height }) {
+  const canvas = useRef(null);
+
+  useEffect(() => {
+    const ctx = canvas.current;
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+        indexAxis: 'y',
+        scales: {
+          y: {
+            stacked: true,
+            grid: {
+              display: false,
+              drawBorder: false,
+            },
+          },
+          x: {
+            stacked: true,
+            grid: {
+              display: false,
+              drawBorder: false,
+            },
+            barRadius: '8px',
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: () => false, // Disable tooltip title
+            },
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: 'nearest',
+        },
+        animation: {
+          duration: 500,
+        },
+        maintainAspectRatio: false,
+        resizeDelay: 200,
+      },
+    });
+
+    return () => {
+      chart.destroy();
+    };
+  }, [data]);
+
   return (
-    <BarChart width={500} height={260} data={data} layout="vertical">
-      <Legend
-        verticalAlign="top"
-        align="left"
-        wrapperStyle={{ borderRadius: '4px' }}
-      />
-      <XAxis type="number" tickLine={false} axisLine={false} />
-      <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} />
-      <Tooltip />
-      <Bar
-        dataKey="pv"
-        stackId="v"
-        fill="#0263FF"
-        radius={5}
-        barSize={28}
-        gapSize={4}
-      />
-      <Bar
-        dataKey="uv"
-        stackId="v"
-        fill="#FF7723"
-        radius={5}
-        barSize={28}
-        gapSize={4}
-        style={{ transform: 'translate(4px, 0)' }}
-      />
-      <Bar
-        dataKey="amt"
-        stackId="v"
-        fill="#8E30FF"
-        radius={5}
-        barSize={28}
-        gapSize={4}
-        style={{ transform: 'translate(8px, 0)' }}
-      />
-    </BarChart>
+    <div className="grow">
+      <canvas ref={canvas} width={width} height={height}></canvas>
+    </div>
   );
 }
+
+export default BarChart01;
