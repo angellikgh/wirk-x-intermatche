@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BarChart from '../../../components/Charts/BarChart';
+import { DashboardService } from '../../../services/mock';
 
 function FamilyVolumn() {
   const [volumnNumber, setVolumnNumber] = useState(0);
@@ -18,21 +19,15 @@ function FamilyVolumn() {
   });
 
   useEffect(() => {
-    setVolumnNumber(2612);
-    setChartData((prevData) => {
-      prevData.labels = [
-        '01/09',
-        '02/09',
-        '03/09',
-        '04/09',
-        '05/09',
-        '06/09',
-        '07/09',
-      ];
-      prevData.datasets[0].data = [40, 88, 60, 79, 70, 93, 8];
-      return {
-        ...prevData,
-      };
+    DashboardService.getVolumnComunity(1).then((payload) => {
+      setVolumnNumber(payload.volumn);
+      setChartData((prevData) => {
+        prevData.labels = payload.dataset.labels;
+        prevData.datasets[0].data = payload.dataset.data;
+        return {
+          ...prevData,
+        };
+      });
     });
   }, []);
 

@@ -1,57 +1,23 @@
 import React, { useEffect, useState } from 'react';
+
 import StackedBarChart from '../../../components/Charts/StackedBarChart01';
+import { DashboardService } from '../../../services/mock';
 
 function FamilyError() {
   const [percentage, setPercentage] = useState(0);
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: 'Initial',
-        data: [],
-        backgroundColor: '#5C80FF',
-        // borderRadius: 4,
-        borderSkipped: false,
-      },
-      {
-        label: 'Rejeux',
-        data: [],
-        backgroundColor: '#FF7723',
-        // borderRadius: 4,
-        borderSkipped: false,
-      },
-      {
-        label: 'Prolongation',
-        data: [],
-        backgroundColor: '#8E30FF',
-        // borderRadius: 4,
-        borderSkipped: false,
-      },
-    ],
-  });
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    setPercentage(13);
-    setChartData([
-      {
-        name: '1200',
-        uv: 10,
-        pv: 20,
-        amt: 45,
-      },
-      {
-        name: '1011',
-        uv: 12,
-        pv: 45,
-        amt: 28,
-      },
-      {
-        name: '1001',
-        uv: 10,
-        pv: 25,
-        amt: 19,
-      },
-    ]);
+    DashboardService.getErrorComunity(1).then((payload) => {
+      setPercentage(payload.percentageKO);
+      const transform = payload.datasets.map((item) => ({
+        label: item[0].labels[0],
+        Initial: item[0].data[0],
+        Rejeux: item[0].data[1],
+        Prolongations: item[0].data[2],
+      }));
+      setChartData(transform);
+    });
   }, []);
 
   return (

@@ -1,32 +1,23 @@
 import React, { useEffect, useState } from 'react';
+
 import StackedBarChart from '../../../components/Charts/StackedBarChart01';
+import { DashboardService } from '../../../services/mock';
 
 function BudgetError() {
   const [percentage, setPercentage] = useState(0);
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    setPercentage(13);
-    setChartData([
-      {
-        name: '1200',
-        uv: 10,
-        pv: 20,
-        amt: 45,
-      },
-      {
-        name: '1011',
-        uv: 12,
-        pv: 45,
-        amt: 28,
-      },
-      {
-        name: '1001',
-        uv: 10,
-        pv: 25,
-        amt: 19,
-      },
-    ]);
+    DashboardService.getErrorComunity(2).then((payload) => {
+      setPercentage(payload.percentageKO);
+      const transform = payload.datasets.map((item) => ({
+        label: item[0].labels[0],
+        Initial: item[0].data[0],
+        Rejeux: item[0].data[1],
+        Prolongations: item[0].data[2],
+      }));
+      setChartData(transform);
+    });
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   BarChart,
   Bar,
@@ -21,13 +21,14 @@ function StackedBarChart({ data, width, height }) {
         <XAxis type="number" tickLine={false} axisLine={false} />
         <YAxis
           type="category"
-          dataKey="name"
+          dataKey="label"
           tickLine={false}
           axisLine={false}
+          interval={0}
         />
         <Tooltip />
         <Bar
-          dataKey="pv"
+          dataKey="Initial"
           stackId="v"
           fill="#0263FF"
           radius={5}
@@ -35,7 +36,7 @@ function StackedBarChart({ data, width, height }) {
           gapSize={4}
         />
         <Bar
-          dataKey="uv"
+          dataKey="Rejeux"
           stackId="v"
           fill="#FF7723"
           radius={5}
@@ -44,7 +45,7 @@ function StackedBarChart({ data, width, height }) {
           style={{ transform: 'translate(4px, 0)' }}
         />
         <Bar
-          dataKey="amt"
+          dataKey="Prolongations"
           stackId="v"
           fill="#8E30FF"
           radius={5}
@@ -62,4 +63,4 @@ StackedBarChart.defaultProps = {
   height: 240,
 };
 
-export default StackedBarChart;
+export default memo(StackedBarChart);

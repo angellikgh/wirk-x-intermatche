@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import axios from 'axios';
 
-import { AuthService } from '../services';
-import api from '../utils/api';
+import { AuthService } from '../services/mock';
 
 const AuthState = createContext();
 const AuthDispatch = createContext();

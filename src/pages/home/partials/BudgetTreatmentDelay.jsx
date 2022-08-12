@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
 import BarChart from '../../../components/Charts/BarChart';
+import { DashboardService } from '../../../services/mock';
 
 function BudgetTreatmentDelay() {
   const [averageTime, setAverageTime] = useState();
@@ -19,14 +21,16 @@ function BudgetTreatmentDelay() {
   });
 
   useEffect(() => {
-    setAverageTime('1,3 j');
-    setPercentageOnTime(95.7);
-    setChartData((prevData) => {
-      prevData.labels = ['<1h', '<6h', '<12h', '<1j', '<2j', '<5j', '>5j'];
-      prevData.datasets[0].data = [90, 88, 60, 79, 70, 93, 8];
-      return {
-        ...prevData,
-      };
+    DashboardService.getTreatmentDelay(2).then((payload) => {
+      setAverageTime(payload.averageTime);
+      setPercentageOnTime(payload.percentageOnTime);
+      setChartData((prevData) => {
+        prevData.labels = payload.dataset.labels;
+        prevData.datasets[0].data = payload.dataset.data;
+        return {
+          ...prevData,
+        };
+      });
     });
   }, []);
 
@@ -34,7 +38,7 @@ function BudgetTreatmentDelay() {
     <div className="card bg-warning-light">
       <div className="card-title">Délais de traitement</div>
       <div className="card-body">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="flex justify-between gap-4">
           <div className="summary">
             <h3 className="summary-title">Temps moyen de traitement</h3>
             <div className="summary-content text-red-light">{averageTime}</div>
@@ -46,7 +50,7 @@ function BudgetTreatmentDelay() {
             </div>
           </div>
         </div>
-        <BarChart data={chartData} fill="#5C80FF" height={240} />
+        <BarChart data={chartData} fill="#5C80FF" height={200} />
       </div>
     </div>
   );

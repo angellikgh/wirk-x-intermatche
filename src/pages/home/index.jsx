@@ -2,8 +2,6 @@ import React from 'react';
 
 import ButtonOutline from '../../components/Buttons/ButtonOutline';
 import * as Icons from '../../components/Icons';
-import PieChart from '../../components/Charts/PieChart';
-import StackedBarChart from '../../components/Charts/StackedBarChart01';
 import FamilyVolumn from './partials/FamilyVolumn';
 import FamilyTreatmentDelay from './partials/FamilyTreatmentDelay';
 import FamilyError from './partials/FamilyError';
@@ -11,6 +9,7 @@ import BudgetVolumn from './partials/BudgetVolumn';
 import BudgetTreatmentDelay from './partials/BudgetTreatmentDelay';
 import BudgetError from './partials/BudgetError';
 import TotalError from './partials/TotalError';
+import Consumption from './partials/Consumption';
 
 function Dashboard() {
   return (
@@ -65,17 +64,7 @@ function Dashboard() {
           </div>
 
           <div className="grid grid-cols-2 gap-2.5">
-            <div className="card">
-              <div className="card-title">Consommation</div>
-              <div className="card-body">
-                <div className="summary">
-                  <h3 className="summary-title">Dossiers restants</h3>
-                  <div className="summary-content text-primary">365</div>
-                </div>
-
-                <PieChart />
-              </div>
-            </div>
+            <Consumption />
 
             <TotalError />
           </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, memo } from 'react';
 
 import {
   Chart,
@@ -25,7 +25,7 @@ Chart.register(
   Legend
 );
 
-function BarChart01({ data, width, height }) {
+function BarChart({ data, width, height }) {
   const canvas = useRef(null);
   const [chart, setChart] = useState(null);
 
@@ -87,4 +87,4 @@ function BarChart01({ data, width, height }) {
   );
 }
 
-export default BarChart01;
+export default memo(BarChart);

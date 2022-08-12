@@ -1,5 +1,5 @@
-import { validateEmail } from '../utils/Utils';
-import api from '../utils/api';
+import { validateEmail } from '../../utils/Utils';
+import api from '../../utils/api';
 
 const AuthService = {
   _url: process.env.REACT_APP_API_BASE_URL,
@@ -40,7 +40,13 @@ const AuthService = {
   },
 
   login(credential) {
-    return api.post('/login', credential);
+    return new Promise((res) =>
+      res({
+        firstname: 'User #1',
+        id: 123,
+        role: 10, //or 20
+      })
+    );
   },
 
   logout() {
