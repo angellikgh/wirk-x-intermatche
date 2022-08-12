@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 
 import ButtonOutline from '../../components/Buttons/ButtonOutline';
-import { IconCloudDownload } from '../../components/Icons';
+import { IconFile, IconCloudDownload } from '../../components/Icons';
 
-function ProofButton({ id, isActive, ...props }) {
+function DocumentButton({ id, isActive, ...props }) {
   return (
     <button
       className={cx('py-1 px-2 rounded-xl text-sm', {
@@ -17,35 +17,40 @@ function ProofButton({ id, isActive, ...props }) {
   );
 }
 
-export default function ({ proofs }) {
-  const [activeProof, setActiveProof] = useState({});
+export default function ({ documents }) {
+  const [activeDoc, setActiveDoc] = useState({});
 
   useEffect(() => {
-    if (proofs.length) {
-      setActiveProof(proofs[0]);
+    if (documents.length) {
+      setActiveDoc(documents[0]);
     }
-  }, [proofs]);
+  }, [documents]);
 
   return (
     <div className="flex flex-col gap-y-2.5 w-[500px]">
       <div className="flex gap-1">
-        {proofs.map((item) => (
-          <ProofButton
-            key={`pf#${item.id}`}
-            id={item.id}
-            isActive={item.id === activeProof.id}
-            onClick={() => setActiveProof(item)}
+        <IconFile />
+        <span className="leading-4 font-semibold">Documents justificatifs</span>
+      </div>
+
+      <div className="flex gap-1">
+        {documents.map((item) => (
+          <DocumentButton
+            key={`pf#${item.UidDocument}`}
+            id={item.UidDocument}
+            isActive={item.UidDocument === activeDoc.UidDocument}
+            onClick={() => setActiveDoc(item)}
           />
         ))}
       </div>
       <div className="flex gap-2 px-2">
         <div className="flex flex-col">
           <div className="text-muted text-sm">Réference</div>
-          <div className="text-sm">{activeProof.reference}</div>
+          <div className="text-sm">{activeDoc.UidDocument}</div>
         </div>
         <div className="flex flex-col">
           <div className="text-muted text-sm">Nom</div>
-          <div className="text-sm">{activeProof.filename}</div>
+          <div className="text-sm">{activeDoc.InputName}</div>
         </div>
       </div>
       <div className="text-right">
@@ -55,7 +60,7 @@ export default function ({ proofs }) {
         </ButtonOutline>
       </div>
       <div className="grow card p-1 h-[680px]">
-        <iframe src={activeProof.filepath} className="w-full h-full border-0" />
+        <iframe src={activeDoc.Path} className="w-full h-full border-0" />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import ButtonOutline from '../../components/Buttons/ButtonOutline';
 import * as Icons from '../../components/Icons';
+import { RequestService } from '../../services/mock';
 import TaskList from './components/TaskItem';
 import DetailProof from './DetailProof';
 
@@ -15,56 +16,42 @@ const SummaryItem = ({ title, content }) => (
 
 export default function () {
   const [children, setChildren] = useState([]);
-  const [summary, seSummary] = useState({});
+  const [summary, setSummary] = useState({});
   const [contribution, setContribution] = useState({});
   const [finalAnsers, setFinalAnswers] = useState([]);
-  const [proofs, setProofs] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [stateLogs, setStateLogs] = useState([]);
 
   useEffect(() => {
-    setChildren([
-      {
-        id: 12,
-        name: 'Child #1',
-        birthday: '8/9/2002',
-      },
-      {
-        id: 13,
-        name: 'Child #2',
-        birthday: '8/9/2008',
-      },
-      {
-        id: 21,
-        name: 'Child #3',
-        birthday: '8/9/2011',
-      },
-    ]);
-
-    seSummary({
-      client: 'Pierre Dupont',
-      birthday: '22/01/1980',
-      community: 'Famille',
-      type: 'INSC',
-      createdAt: '28/06/2022 07:21:43',
-      membership: 187882,
-    });
-
-    setContribution({
-      taskId: 367722,
-      tasks: [
-        {
-          title: 'Le document est il suffisament lisible ?',
-          isTrue: true,
-        },
-        {
-          title: 'Pensez-vous que c’est un faux document ?',
-          isTrue: false,
-        },
-        {
-          title: 'La date de naissance correspond elle ?',
-          isTrue: true,
-        },
-      ],
+    RequestService.getRequestDetail().then((payload) => {
+      setDocuments(payload.documents);
+      setSummary({
+        uid: payload.UidRequest,
+        clientName: payload.ClientNom,
+        birthday: payload.ClientDateDeNaissance,
+        community: payload.Communaute,
+        type: payload.Type,
+        createdAt: payload.CreationDate,
+        membership: payload.IdAdhesion,
+      });
+      setChildren(payload.Enfants);
+      setContribution({
+        taskId: payload.IdFouleFactoryTaskLine,
+        tasks: [
+          {
+            title: 'Le document est il suffisament lisible ?',
+            isTrue: true,
+          },
+          {
+            title: 'Pensez-vous que c’est un faux document ?',
+            isTrue: false,
+          },
+          {
+            title: 'La date de naissance correspond elle ?',
+            isTrue: true,
+          },
+        ],
+      });
     });
 
     setFinalAnswers([
@@ -88,30 +75,6 @@ export default function () {
         pattern: 'Inconnu Tessa',
         child:
           'Le nom et/ou le prénom sur Le livret de famille ou l’acte/extrait de naissance ne correspondent pas aux données saisies',
-      },
-    ]);
-
-    setProofs([
-      {
-        id: 2787,
-        reference: 456,
-        filename: 'WIRK_A_RECETTE_187879_attestation-hebergement-scan.pdf',
-        filepath:
-          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      },
-      {
-        id: 2799,
-        reference: 1680,
-        filename: 'WIRK_A_RECETTE_187879_attestation-hebergement-scan.pdf',
-        filepath:
-          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      },
-      {
-        id: 2808,
-        reference: 1987,
-        filename: 'WIRK_A_RECETTE_187879_attestation-hebergement-scan.pdf',
-        filepath:
-          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
       },
     ]);
 
@@ -146,11 +109,11 @@ export default function () {
 
   return (
     <>
-      <Breadcrumb pathnames={['Demandes', '#315']} />
+      <Breadcrumb pathnames={['Demandes', `#${summary.uid}`]} />
 
       <div className="page-title flex mb-1 gap-3">
         <h1 className="flex justify-between items-center">
-          <Icons.IconDocument width="20" height="18" /> Demande #315
+          <Icons.IconDocument width="20" height="18" /> Demande #{summary.uid}
         </h1>
 
         <button className="bg-success-light px-2 text-sm text-success p-1 rounded">
@@ -173,8 +136,8 @@ export default function () {
               <Icons.IconMale width="17" height="17" className="mr-1" />
               Informations
             </div>
-            <div className="card-body grid grid-cols-2 grid-rows-3">
-              <SummaryItem title="Client" content={summary.client} />
+            <div className="grid grid-cols-2 grid-rows-3">
+              <SummaryItem title="Client" content={summary.clientName} />
               <SummaryItem
                 title="Date de naissance"
                 content={summary.birthday}
@@ -197,7 +160,7 @@ export default function () {
                 {children.length}
               </span>
             </div>
-            <div className="card-body pt-0">
+            <div className="pt-0">
               <table className="table">
                 <thead>
                   <tr>
@@ -223,21 +186,16 @@ export default function () {
         </div>
 
         <div className="flex flex-col gap-y-2.5">
-          <div className="flex mt-4 gap-1">
-            <Icons.IconFile />
-            <span className="leading-[17px]">Documents justificatifs</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-x-2.5">
+          <div className="grid grid-cols-2 gap-x-2.5 mt-4">
             <div className="flex flex-col gap-y-2.5">
               <div className="flex text-sm w-full">
-                <span>Contribution Wirk</span>
-                <span className="text-muted ml-2">
+                <span className="font-semibold">Contribution Wirk</span>
+                <span className="text-muted ml-2 font-medium">
                   Task #{contribution.taskId}
                 </span>
-                <button className="text-xs leading-3 px-2 border-primary-light flex hover:text-primary ml-auto gap-1">
+                <button className="text-xxs leading-3 px-2 border-primary-light flex hover:text-primary ml-auto gap-1">
                   <Icons.IconCloudDownload />
-                  Télecharger le JSON
+                  <span className="font-semibold">Télecharger le JSON</span>
                 </button>
               </div>
 
@@ -245,14 +203,14 @@ export default function () {
 
               <div className="card mt-2.5 border bg-white">
                 <div className="flex text-sm gap-1 items-center">
-                  <span>Réponse finale</span>
+                  <span className="font-semibold">Réponse finale</span>
                   <button className="bg-danger-light text-danger p-1 rounded">
                     Refusé
                   </button>
 
-                  <button className="text-xs leading-3 px-2 border-primary-light flex hover:text-primary ml-auto gap-1">
+                  <button className="text-xxs leading-3 px-2 border-primary-light flex hover:text-primary ml-auto gap-1">
                     <Icons.IconCloudDownload />
-                    Télecharger le JSON
+                    <span className="font-semibold">Télecharger le JSON</span>
                   </button>
                 </div>
 
@@ -279,7 +237,7 @@ export default function () {
               </div>
             </div>
 
-            <DetailProof proofs={proofs} />
+            <DetailProof documents={documents} />
           </div>
         </div>
 

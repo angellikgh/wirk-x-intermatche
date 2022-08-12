@@ -48,7 +48,7 @@ const RequestService = {
         AnswerJson: '{"IdAdhesion":67,"Statut":"OK"}',
         Status: 10,
         Answers: [],
-        Documents: [
+        documents: [
           {
             UidDocument: 263,
             InputName: 'WIRK_A_RECETTE_187880-caf.pdf',

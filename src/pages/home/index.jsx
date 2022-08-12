@@ -17,7 +17,7 @@ function Dashboard() {
       <div className="page-title">
         <h1 className="flex">
           <Icons.IconChart width="21" height="21" />{' '}
-          <span className="font-[600]">Dashboard</span>
+          <span className="font-semibold">Dashboard</span>
         </h1>
       </div>
 
