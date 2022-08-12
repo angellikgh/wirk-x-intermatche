@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import ButtonOutline from '../../components/Buttons/ButtonOutline';
 import * as Icons from '../../components/Icons';
+import { useAuthState } from '../../providers/authProvider';
 import { RequestService } from '../../services/mock';
 import TaskList from './components/TaskItem';
 import DetailProof from './DetailProof';
@@ -15,6 +16,7 @@ const SummaryItem = ({ title, content }) => (
 );
 
 export default function () {
+  const { me } = useAuthState();
   const [children, setChildren] = useState([]);
   const [summary, setSummary] = useState({});
   const [contribution, setContribution] = useState({});
@@ -241,32 +243,34 @@ export default function () {
           </div>
         </div>
 
-        <div>
-          <div className="flex gap-1 text-[14px] leading-4 pl-2">
-            <Icons.IconTimeCountDown width="16" height="16" /> Journalisation de
-            l’état
-          </div>
+        {me.role === 10 && (
           <div>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th width="80">Identifiant</th>
-                  <th>Code erreur</th>
-                  <th>Motif</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stateLogs.map((item, i) => (
-                  <tr key={`sl#${i}`}>
-                    <td>{item.id}</td>
-                    <td>{item.createdAt}</td>
-                    <td>{item.status}</td>
+            <div className="flex gap-1 text-[14px] leading-4 pl-2">
+              <Icons.IconTimeCountDown width="16" height="16" /> Journalisation
+              de l’état
+            </div>
+            <div>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th width="80">Identifiant</th>
+                    <th>Code erreur</th>
+                    <th>Motif</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {stateLogs.map((item, i) => (
+                    <tr key={`sl#${i}`}>
+                      <td>{item.id}</td>
+                      <td>{item.createdAt}</td>
+                      <td>{item.status}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

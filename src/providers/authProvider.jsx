@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { AuthService } from '../services/mock';
 
@@ -77,7 +78,14 @@ const AuthReducer = (state, event) => {
 };
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+
+  useEffect(() => {
+    const userId = AuthService._userId();
+    if (!userId) return;
+    handleLogin().then(() => navigate('/dashboard'));
+  }, []);
 
   const handleUpdate = (event) => {
     const name = event.target.name;
