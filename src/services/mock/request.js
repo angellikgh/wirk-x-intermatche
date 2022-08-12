@@ -1,29 +1,18 @@
-import api from '../../utils/api';
-
 const RequestService = {
   getRequests: (query) =>
-    new Promise((res) =>
-      res([
-        {
-          IdRequest: 1234,
-          Type: 'INSC',
-          Status: 'OK',
-          State: 'WatermarkNotification',
-          CreationDate: '28/06/2022',
-          EndDate: '30/06/2022',
-          Duration: '3mn04sec',
-        },
-        {
-          IdRequest: 1234,
-          Type: 'INSC',
-          Status: 'OK',
-          State: 'WatermarkNotification',
-          CreationDate: '28/06/2022',
-          EndDate: '30/06/2022',
-          Duration: '3mn04sec',
-        },
-      ])
-    ),
+    new Promise((res) => {
+      const requests = Array(100).fill({
+        IdRequest: 1234,
+        Type: 'INSC',
+        Status: 'OK',
+        State: 'WatermarkNotification',
+        CreationDate: '28/06/2022',
+        EndDate: '30/06/2022',
+        Duration: '3mn04sec',
+      });
+
+      res(requests);
+    }),
 
   getRequestDetail: (id) =>
     new Promise((res) =>

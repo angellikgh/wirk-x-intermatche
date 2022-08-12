@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from 'rc-pagination';
 import cx from 'classnames';
 
+import { RequestService } from '../../services/mock';
 import ButtonOutline from '../../components/Buttons/ButtonOutline';
 import TextInput from '../../components/Form/TextInput';
 import Select from '../../components/Form/Select';
@@ -11,33 +12,30 @@ import * as Icons from '../../components/Icons';
 
 import '../../css/pagination.less';
 
-const requests = Array(100)
-  .fill()
-  .map((i, no) => ({
-    IdRequest: no + 1000,
-
-    Type: 'INSC',
-
-    Status: 'OK',
-
-    State: 'WatermarkNotification',
-
-    CreationDate: '28/06/2022',
-
-    EndDate: '30/06/2022',
-
-    Duration: '3mn04sec',
-  }));
-
 export default function () {
   const [current, setCurrent] = useState(1);
-  const onChange = (page) => {
+  const [requests, setRequests] = useState([]);
+  const [search, setSearch] = useState('');
+  const [state, setState] = useState('');
+  const [status, setStatus] = useState('');
+  const [community, setCommunity] = useState('');
+
+  useEffect(() => {
+    RequestService.getRequests({
+      index: current,
+      idCommunity: community,
+      idState: state,
+      idStatus: status,
+    }).then(setRequests);
+  }, [current, search, state, status, community]);
+
+  const onChange = useCallback((page) => {
     setCurrent(page);
-  };
+  });
 
   return (
     <>
-      <div className="page-title flex justify-between">
+      <div className="page-title flex justify-between mb-1">
         <h1 className="flex justify-between items-center">
           <Icons.IconDocument width="20" height="18" /> Demandes
         </h1>
@@ -58,18 +56,28 @@ export default function () {
               backgroundPosition: 'calc(100% - 12px) 50%',
               backgroundRepeat: 'no-repeat',
             }}
+            onChange={(e) => setSearch(e.target.value)}
           ></TextInput>
-          <Select className="text-[12px] h-[32px]">
+          <Select
+            className="text-[12px] h-[32px]"
+            onChange={(e) => setState(e.target.value)}
+          >
             <option>Statut de la demande</option>
             <option>Statut de la demande</option>
             <option>Statut de la demande</option>
           </Select>
-          <Select className="text-[12px] h-[32px]">
+          <Select
+            className="text-[12px] h-[32px]"
+            onChange={(e) => setStatus(e.target.value)}
+          >
             <option>Etat de la demande</option>
             <option>Etat de la demande</option>
             <option>Etat de la demande</option>
           </Select>
-          <Select className="text-[12px] h-[32px]">
+          <Select
+            className="text-[12px] h-[32px]"
+            onChange={(e) => setCommunity(e.target.value)}
+          >
             <option>Communauté</option>
             <option>Communauté</option>
             <option>Communauté</option>
@@ -103,7 +111,11 @@ export default function () {
                       <td width="54">{item.IdRequest}</td>
                       <td>187882</td>
                       <td className="flex" style={{ paddingTop: '15px' }}>
-                        <Icons.IconUsers height="13" className="inline-block" />
+                        <Icons.IconUsers
+                          height="13"
+                          className="inline-block"
+                          fill="#7982FF"
+                        />
                         <span>Familles</span>
                       </td>
                       <td>{item.Type}</td>
@@ -140,8 +152,9 @@ export default function () {
             onChange={onChange}
             current={current}
             total={requests.length}
-            pageSizeOptions={['10', '20', '50', '100']}
-            showSizeChanger={true}
+            prevIcon="Prev"
+            nextIcon="Next"
+            showTitle={false}
           />
         </div>
       </div>

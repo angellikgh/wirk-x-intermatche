@@ -6,6 +6,7 @@ const RequestService = {
       search: '',
       idCommunity: '',
       idState: '',
+      idStatus: '',
       index: 0,
       entryPerPage: 20,
       ...query,

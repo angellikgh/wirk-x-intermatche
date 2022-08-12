@@ -27,7 +27,7 @@ export default function ({ proofs }) {
   }, [proofs]);
 
   return (
-    <div className="flex flex-col gap-y-2.5">
+    <div className="flex flex-col gap-y-2.5 w-[500px]">
       <div className="flex gap-1">
         {proofs.map((item) => (
           <ProofButton
@@ -54,7 +54,7 @@ export default function ({ proofs }) {
           Télecharger le document
         </ButtonOutline>
       </div>
-      <div className="grow card p-1">
+      <div className="grow card p-1 h-[680px]">
         <iframe src={activeProof.filepath} className="w-full h-full border-0" />
       </div>
     </div>

@@ -1,20 +1,17 @@
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  content: [
-    './index.html',
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     container: {
       center: true,
     },
     extend: {
       root: {
-        color: '#535066'
+        color: '#535066',
       },
       borderRadius: {
-        xl: '20px'
+        xl: '20px',
       },
       borderColor: {
         base: '#E3E6F1',
@@ -23,11 +20,12 @@ module.exports = {
         grey: '#A6B0C533',
       },
       boxShadow: {
-        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
+        DEFAULT:
+          '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
         md: '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
         lg: '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.01)',
         xl: '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.01)',
-        card: '0px 14px 44px rgba(166, 176, 197, 0.28)'
+        card: '0px 14px 44px rgba(166, 176, 197, 0.28)',
       },
       colors: {
         DEFAULT: '#535066',
@@ -36,10 +34,12 @@ module.exports = {
           light: '#8C84FF1A',
         },
         success: {
+          DEFAULT: '#506659',
           light: '#9BDFB633',
         },
         danger: {
           DEFAUT: '#EE1D23',
+          light: '#FF508433',
         },
         info: {
           light: '#F7F8FA',
@@ -50,10 +50,10 @@ module.exports = {
         },
         muted: {
           DEFAULT: '#A6B0C5',
-        }
+        },
       },
       margin: {
-        '5px': '5px !important'
+        '5px': '5px !important',
       },
       textColor: {
         DEFAULT: '#535066',
@@ -62,8 +62,8 @@ module.exports = {
         base: '#535066',
         muted: '#A6B0C5',
         red: {
-          light: '#FF9092'
-        }
+          light: '#FF9092',
+        },
       },
       outline: {
         blue: '2px solid rgba(0, 112, 244, 0.5)',
@@ -75,7 +75,7 @@ module.exports = {
         xxs: ['0.625rem', { lineHeight: '0.75rem' }],
         xs: ['0.75rem', { lineHeight: '0.875rem' }],
         sm: ['12px', { lineHeight: '14px' }],
-        base: ['14px', { lineHeight: '1.5'}],
+        base: ['14px', { lineHeight: '1.5' }],
         lg: ['1.125rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
         xl: ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
         '2xl': ['1.5rem', { lineHeight: '1.33', letterSpacing: '-0.01em' }],
@@ -85,8 +85,8 @@ module.exports = {
         '6xl': ['3.75rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
       },
       fontWeight: {
-        medium: 500
-      }
+        medium: 500,
+      },
     },
   },
   plugins: [
@@ -95,7 +95,12 @@ module.exports = {
     // add custom variant for expanding sidebar
     plugin(({ addVariant, addComponents, e }) => {
       addVariant('sidebar-expanded', ({ modifySelectors, separator }) => {
-        modifySelectors(({ className }) => `.sidebar-expanded .${e(`sidebar-expanded${separator}${className}`)}`);
+        modifySelectors(
+          ({ className }) =>
+            `.sidebar-expanded .${e(
+              `sidebar-expanded${separator}${className}`
+            )}`
+        );
       });
 
       addComponents({
@@ -105,7 +110,7 @@ module.exports = {
           padding: '8px 12px',
           fontSize: '13px',
           fontWeight: '600',
-          lineHeight: '16px'
+          lineHeight: '16px',
         },
         '.btn-primary': {
           backgroundColor: '#535066',
@@ -113,7 +118,7 @@ module.exports = {
 
           '&:hover': {
             backgroundColor: '#333142',
-            boxShadow: '0px 14px 44px rgba(166, 176, 197, 0.28)'
+            boxShadow: '0px 14px 44px rgba(166, 176, 197, 0.28)',
           },
         },
         '.btn-outline': {
@@ -123,7 +128,7 @@ module.exports = {
 
           '&:hover': {
             backgroundColor: '#d6d6d6',
-            boxShadow: '0px 14px 44px rgba(166, 176, 197, 0.28)'
+            boxShadow: '0px 14px 44px rgba(166, 176, 197, 0.28)',
           },
         },
       });
@@ -143,7 +148,7 @@ module.exports = {
           },
           svg: {
             marginRight: '10px',
-          }
+          },
         },
       });
 
@@ -157,20 +162,20 @@ module.exports = {
             fontSize: '14px',
             fontWeight: 600,
             lineHeight: '17px',
-            paddingBottom: '10px'
+            paddingBottom: '10px',
           },
           '.card-body': {
-            paddingTop: '10px'
+            paddingTop: '10px',
           },
           '[type=number]': {
-            fontSize: '12px'
+            fontSize: '12px',
           },
           '[type=category]': {
-            fontSize: '12px'
+            fontSize: '12px',
           },
           '.recharts-surface': {
-            borderRadius: '16px'
-          }
+            borderRadius: '16px',
+          },
         },
       });
 
@@ -188,14 +193,14 @@ module.exports = {
             fontSize: '24px',
             fontWeight: 600,
             lineHeight: '29px',
-          }
+          },
         },
       });
 
       addComponents({
         '.table': {
           fontSize: '12px',
-          lineHeight: '14px', 
+          lineHeight: '14px',
           textAlign: 'left',
           width: '100%',
 
@@ -204,14 +209,14 @@ module.exports = {
             fontWeight: 600,
 
             th: {
-              padding: '0.6rem'
-            }
+              padding: '0.6rem',
+            },
           },
           tbody: {
             td: {
-              padding: '0.4rem'
-            }
-          }
+              padding: '0.4rem',
+            },
+          },
         },
       });
 

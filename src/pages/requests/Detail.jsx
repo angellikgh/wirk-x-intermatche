@@ -148,12 +148,20 @@ export default function () {
     <>
       <Breadcrumb pathnames={['Demandes', '#315']} />
 
-      <div className="page-title flex justify-between mb-1">
+      <div className="page-title flex mb-1 gap-3">
         <h1 className="flex justify-between items-center">
           <Icons.IconDocument width="20" height="18" /> Demande #315
         </h1>
 
-        <ButtonOutline className="font-[10px] leading-[12px]">
+        <button className="bg-success-light px-2 text-sm text-success p-1 rounded">
+          Terminée
+        </button>
+
+        <button className="bg-danger-light px-2 text-sm text-danger p-1 rounded">
+          Refusé
+        </button>
+
+        <ButtonOutline className="font-[10px] leading-[12px] ml-auto">
           Télecharger le JSON
         </ButtonOutline>
       </div>
@@ -236,9 +244,9 @@ export default function () {
               <TaskList list={contribution.tasks} />
 
               <div className="card mt-2.5 border bg-white">
-                <div className="flex text-sm">
+                <div className="flex text-sm gap-1 items-center">
                   <span>Réponse finale</span>
-                  <button className="bg-danger-light p-1 bg-danger-light">
+                  <button className="bg-danger-light text-danger p-1 rounded">
                     Refusé
                   </button>
 

@@ -5,6 +5,7 @@
 .@{pagination-prefix-cls} {
     &-item {
         border-radius: 0.25rem;
+        display: none;
     }
 
     &-item-link {
@@ -21,4 +22,23 @@
         }
     }
 
+    &-jump-next {
+        display: none;
+    }
+
+    .rc-pagination-prev, .rc-pagination-next, .rc-pagination-item-link {
+        border: 1px solid #e3e6f1;
+        font-family: inherit;
+        font-size: 12px;
+        padding: 0px 1rem;
+    }
+
+    &-disabled {
+        color: #e3e6f1;
+    }
+
+    &-jump-prev,
+    &-jump-next {
+        display: none;
+    }
 }
