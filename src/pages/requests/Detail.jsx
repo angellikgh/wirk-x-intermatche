@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ButtonOutline from '../../components/Buttons/ButtonOutline';
@@ -16,6 +17,8 @@ const SummaryItem = ({ title, content }) => (
 );
 
 export default function () {
+  const params = useParams();
+
   const { me } = useAuthState();
   const [children, setChildren] = useState([]);
   const [summary, setSummary] = useState({});
@@ -25,7 +28,7 @@ export default function () {
   const [stateLogs, setStateLogs] = useState([]);
 
   useEffect(() => {
-    RequestService.getRequestDetail().then((payload) => {
+    RequestService.getRequestDetail(params.id).then((payload) => {
       setDocuments(payload.documents);
       setSummary({
         uid: payload.UidRequest,
@@ -107,7 +110,7 @@ export default function () {
         status: 'UploadFinished',
       },
     ]);
-  }, []);
+  }, [params]);
 
   return (
     <>
