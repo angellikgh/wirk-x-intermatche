@@ -1,12 +1,6 @@
 import React, { PureComponent, memo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { label: 'Mois en cours', value: 400 },
-  { label: 'Restants', value: 300 },
-  { label: 'Consommé', value: 300 },
-];
-
 const COLORS = ['#8E30FF', '#0263FF', '#FF7723'];
 
 const RADIAN = Math.PI / 180;
@@ -38,7 +32,7 @@ const renderCustomizedLabel = ({
 
 class CustomizedPieChart extends PureComponent {
   render() {
-    const { width, height } = this.props;
+    const { width, height, data } = this.props;
 
     return (
       <ResponsiveContainer width={width} height={height}>
